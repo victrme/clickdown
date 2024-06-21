@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Clickdown Demo</title>
+
+		<style>
+			body {
+				font-size: 40px;
+				font-family: system-ui;
+			}
+
+			input[type='checkbox'] {
+				width: 32px;
+				height: 32px;
+			}
+		</style>
+
+		<script src="./index.js" type="module" defer></script>
+
+		<script defer>
+			window.addEventListener('load', function () {
+				document.getElementById('click-input').onclick = function () {
+					console.log(this.checked)
+				}
+
+				document.getElementById('pointerdown-input').onpointerdown = function () {
+					console.log(this.checked)
+				}
+
+				document.getElementById('clickdown-input').onclickdown = function () {
+					console.log(this.checked)
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div>
+			<input type="checkbox" name="click-input" id="click-input" />
+			<label for="click-input">Click</label>
+		</div>
+
+		<div>
+			<input type="checkbox" name="pointerdown-input" id="pointerdown-input" />
+			<label for="pointerdown-input">Pointerdown</label>
+		</div>
+
+		<div>
+			<input type="checkbox" name="clickdown-input" id="clickdown-input" />
+			<label for="clickdown-input">Clickdown</label>
+		</div>
+	</body>
+</html>
