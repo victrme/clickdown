@@ -17,38 +17,64 @@
 			}
 		</style>
 
-		<script src="./index.js" type="module" defer></script>
+		<script src="./index.ts" defer></script>
 
 		<script defer>
-			window.addEventListener('load', function () {
-				document.getElementById('click-input').onclick = function () {
-					console.log(this.checked)
-				}
+			window.onload = () => {
+				//
 
-				document.getElementById('pointerdown-input').onpointerdown = function () {
-					console.log(this.checked)
-				}
+				// Checkboxes
 
-				document.getElementById('clickdown-input').onclickdown = function () {
+				document.getElementById('c-input')?.addEventListener('click', function () {
 					console.log(this.checked)
-				}
-			})
+				})
+
+				document.getElementById('pd-input').addEventListener('pointerdown', function () {
+					console.log(this.checked)
+				})
+
+				document
+					.getElementById('cd-input')
+					?.onclickdown((e) => console.log(e.target.checked))
+
+				// Anchor links
+
+				document.getElementById('c-link').addEventListener('click', (e) => {
+					console.log(window.location.href)
+				})
+
+				document.getElementById('pd-link').addEventListener('pointerdown', (e) => {
+					console.log(window.location.href)
+				})
+
+				document.getElementById('cd-link')?.onclickdown((e) => {
+					console.log(window.location.href)
+				})
+			}
 		</script>
 	</head>
 	<body>
 		<div>
-			<input type="checkbox" name="click-input" id="click-input" />
-			<label for="click-input">Click</label>
+			<input type="checkbox" id="c-input" />
+			<label for="c-input">Click</label>
 		</div>
 
 		<div>
-			<input type="checkbox" name="pointerdown-input" id="pointerdown-input" />
-			<label for="pointerdown-input">Pointerdown</label>
+			<input type="checkbox" id="pd-input" />
+			<label for="pd-input">Pointerdown</label>
 		</div>
 
 		<div>
-			<input type="checkbox" name="clickdown-input" id="clickdown-input" />
-			<label for="clickdown-input">Clickdown</label>
+			<input type="checkbox" id="cd-input" />
+			<label for="cd-input">Clickdown</label>
+		</div>
+
+		<br />
+
+		<div>
+			<a href="#test1" id="c-link">Click link</a>
+			<a href="#test2" id="pd-link">Pointerdown link</a>
+			<a href="#test3" id="cd-link">Clickdown link</a>
 		</div>
 	</body>
 </html>
