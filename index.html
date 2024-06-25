@@ -21,47 +21,39 @@
 
 		<script defer>
 			window.onload = () => {
-				//
+				// Click
 
-				// Checkboxes
-
-				document.getElementById('c-input')?.addEventListener('click', function () {
+				document.getElementById('c-input').addEventListener('click', function () {
 					console.log(this.checked)
 				})
-
-				document.getElementById('pd-input').addEventListener('pointerdown', function () {
-					console.log(this.checked)
-				})
-
-				document.getElementById('cd-input').onclickdown(function (e, target) {
-					console.log(target.checked)
-				})
-
-				// Anchor links
-
-				document.getElementById('c-link').addEventListener('click', function (e) {
+				document.getElementById('c-link').addEventListener('click', function () {
 					console.log(window.location.href)
 				})
-
-				document.getElementById('pd-link').addEventListener('pointerdown', function (e) {
-					console.log(window.location.href)
-				})
-
-				document.getElementById('cd-link')?.onclickdown(function () {
-					console.log(window.location.href)
-				})
-
-				// Buttons
-
 				document.getElementById('c-button').addEventListener('click', function (e) {
 					console.log(e)
 				})
 
+				// Pointerdown
+
+				document.getElementById('pd-input').addEventListener('pointerdown', function () {
+					console.log(this.checked)
+				})
+				document.getElementById('pd-link').addEventListener('pointerdown', function () {
+					console.log(window.location.href)
+				})
 				document.getElementById('pd-button').addEventListener('pointerdown', function (e) {
 					console.log(e)
 				})
 
-				document.getElementById('cd-button')?.onclickdown(function (e) {
+				// Clickdown
+
+				document.getElementById('cd-input').onclickdown(function (_, target) {
+					console.log(target.checked)
+				})
+				document.getElementById('cd-link').onclickdown(function () {
+					console.log(window.location.href)
+				})
+				document.getElementById('cd-button').onclickdown(function (e) {
 					console.log(e)
 				})
 			}
