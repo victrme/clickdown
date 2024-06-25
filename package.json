@@ -4,7 +4,7 @@
 	"description": "Speeds up click events by combining the speed of pointerdown and keydown, and the accessibility of click",
 	"scripts": {
 		"test": "",
-		"dev": "vite dev",
+		"dev": "vite dev ./demo",
 		"build": "tsup src/index.ts --sourcemap"
 	},
 	"keywords": [],
