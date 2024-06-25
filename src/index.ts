@@ -1,4 +1,4 @@
-import type { Listener } from './type'
+import type { Listener } from './types'
 
 function clickdown(this: Element, callback: Listener) {
 	const self = this
