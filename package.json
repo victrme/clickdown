@@ -2,15 +2,21 @@
 	"name": "clickdown",
 	"version": "1.0.0",
 	"description": "Speeds up click events by combining the speed of pointerdown and keydown, and the accessibility of click",
-	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "vite dev"
+		"test": "",
+		"dev": "vite dev",
+		"build": "tsup src/index.ts --sourcemap"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"tsup": "^8.1.0",
 		"vite": "^5.3.1"
-	}
+	},
+	"main": "dist/index.js",
+	"exports": "./dist/index.js",
+	"files": [
+		"dist"
+	]
 }
