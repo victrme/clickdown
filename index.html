@@ -5,90 +5,147 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Clickdown Demo</title>
 
-		<style>
-			body {
-				font-size: 40px;
-				font-family: system-ui;
-			}
-
-			input[type='checkbox'] {
-				width: 32px;
-				height: 32px;
-			}
-		</style>
-
 		<script src="src/index.ts" defer></script>
 
 		<script defer>
 			window.onload = () => {
+				const log = (str) => (document.getElementById('console').textContent = str)
+
 				// Click
 
-				document.getElementById('c-input').addEventListener('click', function () {
-					console.log(this.checked)
-				})
-				document.getElementById('c-link').addEventListener('click', function () {
-					console.log(window.location.href)
-				})
-				document.getElementById('c-button').addEventListener('click', function (e) {
-					console.log(e)
-				})
+				document.querySelector('label[for="c-input"]').onclick = function () {
+					log(this.checked)
+				}
+				document.getElementById('c-input').onclick = function () {
+					log(this.checked)
+				}
+				document.getElementById('c-link').onclick = function () {
+					log(window.location.href)
+				}
+				document.getElementById('c-button').onclick = function (event) {
+					log(event.type)
+				}
 
 				// Pointerdown
 
-				document.getElementById('pd-input').addEventListener('pointerdown', function () {
-					console.log(this.checked)
-				})
-				document.getElementById('pd-link').addEventListener('pointerdown', function () {
-					console.log(window.location.href)
-				})
-				document.getElementById('pd-button').addEventListener('pointerdown', function (e) {
-					console.log(e)
-				})
+				document.querySelector('label[for="pd-input"]').onpointerdown = function () {
+					log(this.checked)
+				}
+				document.getElementById('pd-input').onpointerdown = function () {
+					log(this.checked)
+				}
+				document.getElementById('pd-link').onpointerdown = function () {
+					log(window.location.href)
+				}
+				document.getElementById('pd-button').onpointerdown = function (event) {
+					log(event.type)
+				}
 
 				// Clickdown
 
+				document.querySelector('label[for="cd-input"]').onclickdown(function (_, target) {
+					log(target.checked)
+				})
 				document.getElementById('cd-input').onclickdown(function (_, target) {
-					console.log(target.checked)
+					log(target.checked)
 				})
 				document.getElementById('cd-link').onclickdown(function () {
-					console.log(window.location.href)
+					log(window.location.href)
 				})
-				document.getElementById('cd-button').onclickdown(function (e) {
-					console.log(e)
+				document.getElementById('cd-button').onclickdown(function (event) {
+					log(event.type)
 				})
 			}
 		</script>
 	</head>
 	<body>
-		<div>
-			<input type="checkbox" id="c-input" />
-			<label for="c-input">Click</label>
-		</div>
+		<header>
+			<h1>Clickdown demo</h1>
+			<a href="https://github.com/victrme/clickdown">source</a> -
+			<a href="https://npmjs.com/clickdown">npmjs</a>
 
-		<div>
-			<input type="checkbox" id="pd-input" />
-			<label for="pd-input">Pointerdown</label>
-		</div>
+			<p>
+				Speeds up clicks by combining the speed of pointerdown and the features of click in a single
+				"clickdown" event.
+			</p>
+			<p>
+				It attaches the onclickdown function to Element and HTMLElement prototypes, which means you can
+				use it with getElementById, querySelector, and others.
+			</p>
+		</header>
 
-		<div>
-			<input type="checkbox" id="cd-input" />
-			<label for="cd-input">Clickdown</label>
-		</div>
+		<main>
+			<content>
+				<h2>Checkboxes</h2>
 
-		<br />
+				<input type="checkbox" id="c-input" />
+				<label for="c-input">Click</label>
 
-		<div>
-			<a href="#click" id="c-link">Click link</a>
-			<a href="#pointerdown" id="pd-link">Pointerdown link</a>
-			<a href="#clickdown" id="cd-link">Clickdown link</a>
-		</div>
+				<input type="checkbox" id="pd-input" />
+				<label for="pd-input">Pointerdown</label>
 
-		<br />
+				<input type="checkbox" id="cd-input" />
+				<label for="cd-input">Clickdown</label>
 
-		<div>
-			<button id="c-button">Click button</button>
-			<button id="pd-button">Pointerdown button</button>
-			<button id="cd-button">Clickdown button</button>
-		</div>
+				<br />
+
+				<h2>Links</h2>
+				<div>
+					<a href="#click" id="c-link">Click</a>
+					<a href="#pointerdown" id="pd-link">Pointerdown</a>
+					<a href="#clickdown" id="cd-link">Clickdown</a>
+				</div>
+
+				<br />
+
+				<h2>Buttons</h2>
+				<div>
+					<button id="c-button">Click</button>
+					<button id="pd-button">Pointerdown</button>
+					<button id="cd-button">Clickdown</button>
+				</div>
+			</content>
+
+			<content>
+				<h2>Console.log</h2>
+				<textarea id="console"></textarea>
+			</content>
+		</main>
+
+		<style>
+			body {
+				font-size: 20px;
+				font-family: system-ui;
+				max-width: 900px;
+				margin: auto;
+			}
+
+			input[type='checkbox'] {
+				width: 20px;
+				height: 20px;
+			}
+
+			header,
+			main {
+				padding: 1em 2em;
+			}
+
+			main {
+				display: flex;
+				flex-wrap: wrap;
+				place-content: space-between;
+				gap: 3em;
+			}
+
+			textarea {
+				resize: none;
+				height: 60px;
+				width: 300px;
+			}
+
+			h2 {
+				font-size: 1.2em;
+			}
+		</style>
 	</body>
 </html>
