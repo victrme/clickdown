@@ -33,22 +33,36 @@
 					console.log(this.checked)
 				})
 
-				document
-					.getElementById('cd-input')
-					?.onclickdown((e) => console.log(e.target.checked))
+				document.getElementById('cd-input').onclickdown(function (e, target) {
+					console.log(target.checked)
+				})
 
 				// Anchor links
 
-				document.getElementById('c-link').addEventListener('click', (e) => {
+				document.getElementById('c-link').addEventListener('click', function (e) {
 					console.log(window.location.href)
 				})
 
-				document.getElementById('pd-link').addEventListener('pointerdown', (e) => {
+				document.getElementById('pd-link').addEventListener('pointerdown', function (e) {
 					console.log(window.location.href)
 				})
 
-				document.getElementById('cd-link')?.onclickdown((e) => {
+				document.getElementById('cd-link')?.onclickdown(function () {
 					console.log(window.location.href)
+				})
+
+				// Buttons
+
+				document.getElementById('c-button').addEventListener('click', function (e) {
+					console.log(e)
+				})
+
+				document.getElementById('pd-button').addEventListener('pointerdown', function (e) {
+					console.log(e)
+				})
+
+				document.getElementById('cd-button')?.onclickdown(function (e) {
+					console.log(e)
 				})
 			}
 		</script>
@@ -72,9 +86,17 @@
 		<br />
 
 		<div>
-			<a href="#test1" id="c-link">Click link</a>
-			<a href="#test2" id="pd-link">Pointerdown link</a>
-			<a href="#test3" id="cd-link">Clickdown link</a>
+			<a href="#click" id="c-link">Click link</a>
+			<a href="#pointerdown" id="pd-link">Pointerdown link</a>
+			<a href="#clickdown" id="cd-link">Clickdown link</a>
+		</div>
+
+		<br />
+
+		<div>
+			<button id="c-button">Click button</button>
+			<button id="pd-button">Pointerdown button</button>
+			<button id="cd-button">Clickdown button</button>
 		</div>
 	</body>
 </html>

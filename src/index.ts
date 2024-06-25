@@ -1,24 +1,28 @@
-type Callback = (e: Event) => void
+import type { Listener } from './type'
 
-function clickdown(callback: Callback) {
-	const self = this as Element
+function clickdown(this: Element, callback: Listener) {
+	const self = this
+
 	const isCheckbox = self.tagName === 'INPUT' && self.getAttribute('type') === 'checkbox'
 	const isLink = self.tagName === 'A'
 	let isFast = false
 
 	self?.addEventListener('pointerdown', downEvent)
 	self?.addEventListener('keydown', downEvent)
-
-	self?.addEventListener('click', function (event: Event) {
-		if (isFast === false) {
-			return callback(event)
-		}
-
-		isFast = false
-		event.preventDefault()
-	})
+	self?.addEventListener('click', clickEvent)
 
 	function downEvent(event: Event) {
+		const isKeydown = event.type === 'keydown'
+		const code = (event as KeyboardEvent)?.code ?? ''
+
+		if (isKeydown && !code.match(/Space|Enter/)) {
+			return
+		}
+
+		if (isLink && isKeydown && code === 'Space') {
+			return
+		}
+
 		if (isCheckbox) {
 			const checkbox = self as HTMLInputElement
 			checkbox.checked = !checkbox.checked
@@ -30,8 +34,19 @@ function clickdown(callback: Callback) {
 		}
 
 		isFast = true
-		callback(event)
+		callback(event as PointerEvent | KeyboardEvent, self)
+	}
+
+	function clickEvent(event: Event) {
+		if (isFast === false) {
+			callback(event as MouseEvent, self)
+			return
+		}
+
+		isFast = false
+		event.preventDefault()
 	}
 }
 
 Element.prototype['onclickdown'] = clickdown
+HTMLElement.prototype['onclickdown'] = clickdown

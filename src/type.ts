@@ -1,7 +1,11 @@
 declare global {
 	interface Element {
-		onclickdown: (callback: (e: Event) => void) => void
+		onclickdown: (listener: Listener) => void
+	}
+
+	interface HTMLElement {
+		onclickdown: (listener: Listener) => void
 	}
 }
 
-export {}
+export type Listener = (event: PointerEvent | MouseEvent | KeyboardEvent, target: Element) => void
