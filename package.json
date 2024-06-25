@@ -5,6 +5,7 @@
 	"scripts": {
 		"test": "",
 		"dev": "vite dev ./demo",
+		"demo": "vite build ./demo",
 		"build": "tsup src/index.ts --sourcemap"
 	},
 	"keywords": [],
