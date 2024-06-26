@@ -1,6 +1,6 @@
 import type { Listener } from './types'
 
-function clickdown(this: Element, callback: Listener) {
+function clickdown<T extends Element>(this: T, callback: Listener<T>) {
 	const self = this
 
 	const isCheckbox = self.tagName === 'INPUT' && self.getAttribute('type') === 'checkbox'
@@ -24,12 +24,12 @@ function clickdown(this: Element, callback: Listener) {
 		}
 
 		if (isCheckbox) {
-			const checkbox = self as HTMLInputElement
+			const checkbox = self as unknown as HTMLInputElement
 			checkbox.checked = !checkbox.checked
 		}
 
 		if (isLink) {
-			const link = self as HTMLAnchorElement
+			const link = self as unknown as HTMLAnchorElement
 			window.location.href = link.href
 		}
 
@@ -49,4 +49,5 @@ function clickdown(this: Element, callback: Listener) {
 }
 
 Element.prototype['onclickdown'] = clickdown
-HTMLElement.prototype['onclickdown'] = clickdown
+HTMLElement.prototype['onclickdown'] = clickdown<HTMLElement>
+HTMLInputElement.prototype['onclickdown'] = clickdown<HTMLInputElement>
