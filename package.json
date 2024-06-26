@@ -1,6 +1,6 @@
 {
 	"name": "clickdown",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"license": "MIT",
 	"author": "Victor Azevedo (https://victr.me)",
 	"description": "Faster user interactions by combining the pointerdown and the click event in a single 'clickdown' event",
@@ -22,8 +22,16 @@
 		"vite": "^5.3.1"
 	},
 	"main": "dist/index.js",
-	"exports": "./dist/index.js",
+	"types": "src/types.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./src/types.ts"
+		}
+	},
 	"files": [
-		"dist"
+		"dist/index.js",
+		"dist/index.js.map",
+		"src/types.ts"
 	]
 }
