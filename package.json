@@ -15,7 +15,7 @@
 		"test": "",
 		"dev": "vite dev ./demo",
 		"demo": "vite build ./demo",
-		"build": "tsup src/index.ts --sourcemap"
+		"build": "tsup src/index.ts"
 	},
 	"devDependencies": {
 		"tsup": "^8.1.0",
