@@ -13,8 +13,8 @@
 	],
 	"scripts": {
 		"test": "",
-		"dev": "vite dev ./demo",
-		"demo": "vite build ./demo",
+		"dev": "vite dev",
+		"demo": "vite build",
 		"build": "tsup src/index.ts"
 	},
 	"devDependencies": {

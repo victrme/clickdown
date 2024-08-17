@@ -1,6 +1,6 @@
-import type { Listener } from './types'
+import type { Listener, Options } from './types'
 
-function clickdown<T extends Element>(this: T, callback: Listener<T>) {
+function clickdown<T extends Element>(this: T, callback: Listener<T>, options?: Options) {
 	const self = this
 
 	const isCheckbox = self.tagName === 'INPUT' && self.getAttribute('type') === 'checkbox'
@@ -14,6 +14,8 @@ function clickdown<T extends Element>(this: T, callback: Listener<T>) {
 	function downEvent(event: Event) {
 		const isKeydown = event.type === 'keydown'
 		const code = (event as KeyboardEvent)?.code ?? ''
+		const target = event.target as Element
+		const tagName = target.tagName ?? ''
 
 		if (isKeydown && !code.match(/Space|Enter/)) {
 			return
@@ -21,6 +23,11 @@ function clickdown<T extends Element>(this: T, callback: Listener<T>) {
 
 		if (isLink && isKeydown && code === 'Space') {
 			return
+		}
+
+		if (tagName === 'SUMMARY') {
+			const details = self as unknown as HTMLDetailsElement
+			details.open = !details.open
 		}
 
 		if (isCheckbox) {
@@ -38,6 +45,13 @@ function clickdown<T extends Element>(this: T, callback: Listener<T>) {
 	}
 
 	function clickEvent(event: Event) {
+		const path = event.composedPath()
+		const onChild = path[0] !== self
+
+		if (onChild && options?.propagate === false) {
+			return
+		}
+
 		if (isFast === false) {
 			callback(event as MouseEvent, self)
 			return

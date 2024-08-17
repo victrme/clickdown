@@ -6,12 +6,16 @@ declare global {
 		 * Clickdown creates "pointerdown", "keydown", and "click" listeners
 		 * to speed up actions. It toggles checkboxes and changes urls on "down".
 		 *
-		 * When no type is specified, the callback target will be of type Element.
+		 * When no type is specified, the listener target will be of type Element.
 		 *
 		 * @param this - An Element
-		 * @param callback - This callback passes an event and target as parameters
+		 * @param listener - This listener passes an event and target as parameters
+		 * @param options - Clickdown options
 		 */
-		onclickdown: (listener: (event: PointerMouseKeyboard, target: Element) => void) => void
+		onclickdown: (
+			listener: (event: PointerMouseKeyboard, target: Element) => void,
+			options?: Options,
+		) => void
 	}
 
 	interface HTMLElement {
@@ -22,9 +26,13 @@ declare global {
 		 * Uses HTMLElement with `getElementById`.
 		 *
 		 * @param this - An HTMLElement
-		 * @param callback - This callback passes an event and target as parameters
+		 * @param listener - This listener passes an event and target as parameters
+		 * @param options - Clickdown options
 		 */
-		onclickdown: (listener: (event: PointerMouseKeyboard, target: HTMLElement) => void) => void
+		onclickdown: (
+			listener: (event: PointerMouseKeyboard, target: HTMLElement) => void,
+			options?: Options,
+		) => void
 	}
 
 	interface HTMLInputElement {
@@ -36,12 +44,20 @@ declare global {
 		 * .value or .checked methods.
 		 *
 		 * @param this - An HTMLInputElement
-		 * @param callback - This callback passes an event and target as parameters
+		 * @param listener - This listener passes an event and target as parameters
+		 * @param options - Clickdown options
 		 */
-		onclickdown: (listener: (event: PointerMouseKeyboard, target: HTMLInputElement) => void) => void
+		onclickdown: (
+			listener: (event: PointerMouseKeyboard, target: HTMLInputElement) => void,
+			options?: Options,
+		) => void
 	}
 }
 
 export interface Listener<T extends Element> {
 	(event: PointerMouseKeyboard, target: T): void
+}
+
+export interface Options {
+	propagate?: boolean
 }

@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Clickdown Demo</title>
 
-		<script src="../src/index.ts" type="module"></script>
+		<script src="./src/index.ts" type="module"></script>
 
 		<script defer>
 			window.onload = () => {
@@ -25,6 +25,9 @@
 				document.getElementById('c-button').onclick = function (event) {
 					log(event.type)
 				}
+				document.getElementById('c-details').onclick = function (event) {
+					log(this.open)
+				}
 
 				// Pointerdown
 
@@ -39,6 +42,9 @@
 				}
 				document.getElementById('pd-button').onpointerdown = function (event) {
 					log(event.type)
+				}
+				document.getElementById('pd-details').onpointerdown = function (event) {
+					log(this.open)
 				}
 
 				// Clickdown
@@ -55,6 +61,18 @@
 				document.getElementById('cd-button').onclickdown(function (event) {
 					log(event.type)
 				})
+				document.getElementById('cd-details').onclickdown(function (_, target) {
+					log(target.open)
+				})
+
+				// Options
+
+				document
+					.getElementById('propagate-target')
+					.onclickdown(() => log('Clickdown propagates'), { propagate: true }) // default
+				document
+					.getElementById('no-propagate-target')
+					.onclickdown(() => log('Clickdown does not propagates'), { propagate: false })
 			}
 		</script>
 	</head>
@@ -65,12 +83,12 @@
 			<a href="https://npmjs.com/clickdown">npmjs</a>
 
 			<p>
-				Speeds up clicks by combining the speed of pointerdown and the features of click in a single
-				"clickdown" event.
+				Speeds up clicks by combining the speed of pointerdown and the features of click in
+				a single "clickdown" event.
 			</p>
 			<p>
-				It attaches the onclickdown function to Element and HTMLElement prototypes, which means you can
-				use it with getElementById, querySelector, and others.
+				It attaches the onclickdown function to Element and HTMLElement prototypes, which
+				means you can use it with getElementById, querySelector, and others.
 			</p>
 		</header>
 
@@ -103,6 +121,41 @@
 					<button id="c-button">Click</button>
 					<button id="pd-button">Pointerdown</button>
 					<button id="cd-button">Clickdown</button>
+				</div>
+
+				<br />
+
+				<h2>Details</h2>
+				<div>
+					<details id="c-details">
+						<summary>Click</summary>
+						<p>Hello world</p>
+					</details>
+					<details id="pd-details">
+						<summary>Pointerdown</summary>
+						<p>Hello world</p>
+					</details>
+					<details id="cd-details">
+						<summary>Clickdown</summary>
+						<p>Hello world</p>
+					</details>
+				</div>
+
+				<h2>options</h2>
+				<h3>options.propagate</h3>
+
+				<div>
+					<h4>true</h4>
+					<div id="propagate-target" class="propagate">
+						<span>Click this box, link does not work</span><br />
+						<a href="#is-prevented">go to #is-prevented</a>
+					</div>
+
+					<h4>false</h4>
+					<div id="no-propagate-target" class="propagate">
+						<span>Click this box, link works</span><br />
+						<a href="#not-prevented">go to #not-prevented</a>
+					</div>
 				</div>
 			</content>
 
@@ -145,6 +198,14 @@
 
 			h2 {
 				font-size: 1.2em;
+			}
+
+			.propagate {
+				border: 1px solid #2226;
+				background-color: #2221;
+				margin: 4px 0;
+				padding: 1ch;
+				border-radius: 4px;
 			}
 		</style>
 	</body>
