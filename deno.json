@@ -1,0 +1,42 @@
+{
+	"name": "@victr/clickdown",
+	"version": "1.2.2",
+	"exports": "./src/index.ts",
+	"tasks": {
+		"test": "",
+		"dev": "vite dev",
+		"demo": "vite build",
+		"build": "tsup src/index.ts"
+	},
+	"imports": {
+		"tsup": "npm:tsup@^8.4.0",
+		"vite": "npm:vite@^6.3.2"
+	},
+	"lint": {
+		"include": [
+			"src"
+		],
+		"rules": {
+			"tags": [
+				"recommended"
+			]
+		}
+	},
+	"fmt": {
+		"indentWidth": 4,
+		"lineWidth": 120,
+		"semiColons": false,
+		"singleQuote": true,
+		"useTabs": true
+	},
+	"compilerOptions": {
+		"strict": true,
+		"lib": [
+			"deno.ns",
+			"dom",
+			"dom.iterable"
+		]
+	},
+	"nodeModulesDir": "auto",
+	"$schema": "https://deno.land/x/deno/cli/schemas/config-file.v1.json"
+}

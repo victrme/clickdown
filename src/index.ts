@@ -1,4 +1,4 @@
-import type { Listener, Options } from './types'
+import type { Listener, Options } from './types.ts'
 
 function clickdown<T extends Element>(this: T, callback: Listener<T>, options?: Options) {
 	const self = this
@@ -37,7 +37,7 @@ function clickdown<T extends Element>(this: T, callback: Listener<T>, options?: 
 
 		if (isLink) {
 			const link = self as unknown as HTMLAnchorElement
-			window.location.href = link.href
+			globalThis.window.location.href = link.href
 		}
 
 		isFast = true

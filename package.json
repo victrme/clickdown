@@ -11,17 +11,6 @@
 		"listener",
 		"dom"
 	],
-	"scripts": {
-		"test": "",
-		"dev": "vite dev",
-		"demo": "vite build",
-		"build": "tsup src/index.ts"
-	},
-	"devDependencies": {
-		"tsup": "^8.2.4",
-		"typescript": "^5.5.4",
-		"vite": "^5.4.1"
-	},
 	"main": "dist/index.js",
 	"types": "src/types.ts",
 	"exports": {
