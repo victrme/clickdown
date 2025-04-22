@@ -1,3 +1,6 @@
+/**
+ * A Pointer, Mouse, or Keyboard event based on which user action triggered it.
+ */
 export type PointerMouseKeyboard = PointerEvent | MouseEvent | KeyboardEvent
 
 /**
@@ -9,6 +12,7 @@ export interface Listener<T extends Element> {
 }
 
 /**
+ * Clickdown options
  * @param {boolean} propagate - Apply clickdown to the target's children
  */
 export interface Options {
