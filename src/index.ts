@@ -25,7 +25,11 @@ export interface Options {
  *
  * When no types are specified, the listener target will be an Element.
  */
-export function onclickdown<T extends Element>(target: T, callback: Listener<T>, options?: Options): void {
+export function onclickdown<T extends Element>(target: T | null, callback: Listener<T>, options?: Options): void {
+	if (!target) {
+		throw new Error('Target is undefined')
+	}
+
 	const isCheckbox = target.tagName === 'INPUT' && target.getAttribute('type') === 'checkbox'
 	const isLink = target.tagName === 'A'
 	let isFast = false
@@ -76,7 +80,7 @@ export function onclickdown<T extends Element>(target: T, callback: Listener<T>,
 		}
 
 		if (isFast === false) {
-			callback(event as MouseEvent, target)
+			callback(event as MouseEvent, target as T)
 			return
 		}
 
