@@ -1,12 +1,4 @@
-export type PointerMouseKeyboard = PointerEvent | MouseEvent | KeyboardEvent
-
-export interface Listener<T extends Element> {
-	(event: PointerMouseKeyboard, target: T): void
-}
-
-export interface Options {
-	propagate?: boolean
-}
+import { type Listener, type Options } from './types.ts'
 
 /**
  * Clickdown creates "pointerdown", "keydown", and "click" listeners
@@ -76,18 +68,4 @@ export function onclickdown<T extends Element>(target: T, callback: Listener<T>,
 		isFast = false
 		event.preventDefault()
 	}
-}
-
-function onclickdownEvent<T extends Element>(this: T, callback: Listener<T>, options?: Options) {
-	onclickdown<T>(this, callback, options)
-}
-
-if (Element) {
-	Element.prototype['onclickdown'] = onclickdownEvent<Element>
-}
-if (HTMLElement) {
-	HTMLElement.prototype['onclickdown'] = onclickdownEvent<HTMLElement>
-}
-if (HTMLInputElement) {
-	HTMLInputElement.prototype['onclickdown'] = onclickdownEvent<HTMLInputElement>
 }

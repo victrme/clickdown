@@ -11,17 +11,17 @@
 		"listener",
 		"dom"
 	],
-	"main": "dist/index.js",
+	"main": "dist/global.js",
 	"types": "src/types.ts",
 	"exports": {
 		".": {
-			"import": "./dist/index.js",
+			"import": "./dist/global.js",
 			"types": "./src/types.ts"
 		}
 	},
 	"files": [
-		"dist/index.js",
-		"dist/index.js.map",
+		"dist/global.js",
+		"dist/global.js.map",
 		"src/types.ts"
 	]
 }

@@ -6,9 +6,10 @@
 		"test": "",
 		"dev": "vite dev",
 		"demo": "vite build",
-		"build": "tsup src/index.ts"
+		"build": "tsup src/global.ts"
 	},
 	"imports": {
+		"typescript": "npm:typescript@^5.8.3",
 		"tsup": "npm:tsup@^8.4.0",
 		"vite": "npm:vite@^6.3.2"
 	},
