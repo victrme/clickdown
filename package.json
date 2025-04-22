@@ -1,6 +1,6 @@
 {
 	"name": "clickdown",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"license": "MIT",
 	"author": "Victor Azevedo (https://victr.me)",
 	"description": "Faster user interactions by combining the pointerdown and the click event in a single 'clickdown' event",
