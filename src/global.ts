@@ -1,4 +1,4 @@
-import { type Listener, type Options } from './types.ts'
+import type { Listener, Options } from './types/index.ts'
 import { onclickdown } from './index.ts'
 
 function onclickdownEvent<T extends Element>(this: T, callback: Listener<T>, options?: Options) {

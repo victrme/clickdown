@@ -12,16 +12,16 @@
 		"dom"
 	],
 	"main": "dist/global.js",
-	"types": "src/types.ts",
+	"types": "src/types/global.ts",
 	"exports": {
 		".": {
 			"import": "./dist/global.js",
-			"types": "./src/types.ts"
+			"types": "./src/types/global.ts"
 		}
 	},
 	"files": [
 		"dist/global.js",
 		"dist/global.js.map",
-		"src/types.ts"
+		"src/types/global.ts"
 	]
 }

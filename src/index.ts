@@ -1,14 +1,10 @@
-import { type Listener, type Options } from './types.ts'
+import type { Listener, Options } from './types/index.ts'
 
 /**
  * Clickdown creates "pointerdown", "keydown", and "click" listeners
  * to speed up actions. It toggles checkboxes and changes urls on "down".
  *
- * When no type is specified, the listener target will be an Element.
- *
- * @param target - An Element or any subtype of Element
- * @param listener - Passes event and target as parameters
- * @param options - Clickdown options
+ * When no types are specified, the listener target will be an Element.
  */
 export function onclickdown<T extends Element>(target: T, callback: Listener<T>, options?: Options): void {
 	const isCheckbox = target.tagName === 'INPUT' && target.getAttribute('type') === 'checkbox'
