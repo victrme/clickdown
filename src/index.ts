@@ -1,15 +1,31 @@
-import type { Listener, Options } from './types.ts'
+export type PointerMouseKeyboard = PointerEvent | MouseEvent | KeyboardEvent
 
-function clickdown<T extends Element>(this: T, callback: Listener<T>, options?: Options) {
-	const self = this
+export interface Listener<T extends Element> {
+	(event: PointerMouseKeyboard, target: T): void
+}
 
-	const isCheckbox = self.tagName === 'INPUT' && self.getAttribute('type') === 'checkbox'
-	const isLink = self.tagName === 'A'
+export interface Options {
+	propagate?: boolean
+}
+
+/**
+ * Clickdown creates "pointerdown", "keydown", and "click" listeners
+ * to speed up actions. It toggles checkboxes and changes urls on "down".
+ *
+ * When no type is specified, the listener target will be an Element.
+ *
+ * @param target - An Element or any subtype of Element
+ * @param listener - Passes event and target as parameters
+ * @param options - Clickdown options
+ */
+export function onclickdown<T extends Element>(target: T, callback: Listener<T>, options?: Options): void {
+	const isCheckbox = target.tagName === 'INPUT' && target.getAttribute('type') === 'checkbox'
+	const isLink = target.tagName === 'A'
 	let isFast = false
 
-	self?.addEventListener('pointerdown', downEvent)
-	self?.addEventListener('keydown', downEvent)
-	self?.addEventListener('click', clickEvent)
+	target?.addEventListener('pointerdown', downEvent)
+	target?.addEventListener('keydown', downEvent)
+	target?.addEventListener('click', clickEvent)
 
 	function downEvent(event: Event) {
 		const isKeydown = event.type === 'keydown'
@@ -26,34 +42,34 @@ function clickdown<T extends Element>(this: T, callback: Listener<T>, options?: 
 		}
 
 		if (tagName === 'SUMMARY') {
-			const details = self as unknown as HTMLDetailsElement
+			const details = target as unknown as HTMLDetailsElement
 			details.open = !details.open
 		}
 
 		if (isCheckbox) {
-			const checkbox = self as unknown as HTMLInputElement
+			const checkbox = target as unknown as HTMLInputElement
 			checkbox.checked = !checkbox.checked
 		}
 
 		if (isLink) {
-			const link = self as unknown as HTMLAnchorElement
+			const link = target as unknown as HTMLAnchorElement
 			globalThis.window.location.href = link.href
 		}
 
 		isFast = true
-		callback(event as PointerEvent | KeyboardEvent, self)
+		callback(event as PointerEvent | KeyboardEvent, target as T)
 	}
 
 	function clickEvent(event: Event) {
 		const path = event.composedPath()
-		const onChild = path[0] !== self
+		const onChild = path[0] !== target
 
 		if (onChild && options?.propagate === false) {
 			return
 		}
 
 		if (isFast === false) {
-			callback(event as MouseEvent, self)
+			callback(event as MouseEvent, target)
 			return
 		}
 
@@ -62,6 +78,16 @@ function clickdown<T extends Element>(this: T, callback: Listener<T>, options?: 
 	}
 }
 
-Element.prototype['onclickdown'] = clickdown
-HTMLElement.prototype['onclickdown'] = clickdown<HTMLElement>
-HTMLInputElement.prototype['onclickdown'] = clickdown<HTMLInputElement>
+function onclickdownEvent<T extends Element>(this: T, callback: Listener<T>, options?: Options) {
+	onclickdown<T>(this, callback, options)
+}
+
+if (Element) {
+	Element.prototype['onclickdown'] = onclickdownEvent<Element>
+}
+if (HTMLElement) {
+	HTMLElement.prototype['onclickdown'] = onclickdownEvent<HTMLElement>
+}
+if (HTMLInputElement) {
+	HTMLInputElement.prototype['onclickdown'] = onclickdownEvent<HTMLInputElement>
+}

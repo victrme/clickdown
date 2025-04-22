@@ -1,6 +1,6 @@
-declare global {
-	type PointerMouseKeyboard = PointerEvent | MouseEvent | KeyboardEvent
+import type { Options, PointerMouseKeyboard } from './index.ts'
 
+declare global {
 	interface Element {
 		/**
 		 * Clickdown creates "pointerdown", "keydown", and "click" listeners
@@ -52,12 +52,4 @@ declare global {
 			options?: Options,
 		) => void
 	}
-}
-
-export interface Listener<T extends Element> {
-	(event: PointerMouseKeyboard, target: T): void
-}
-
-export interface Options {
-	propagate?: boolean
 }
