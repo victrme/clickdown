@@ -16,12 +16,17 @@
 	"exports": {
 		".": {
 			"import": "./dist/global.js",
-			"types": "./src/global_types.ts"
+			"types": "./src/global.d.ts"
+		},
+		"./mod": {
+			"import": "./dist/index.js",
+			"types": "./src/index.d.ts"
 		}
 	},
 	"files": [
 		"dist/global.js",
-		"dist/global.js.map",
-		"src/global_types.ts"
+		"src/global.d.ts",
+		"dist/index.js",
+		"src/index.d.ts"
 	]
 }
