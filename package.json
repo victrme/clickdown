@@ -12,10 +12,14 @@
 		"dom"
 	],
 	"scripts": {
-		"test": "",
 		"dev": "vite dev",
 		"demo": "vite build",
 		"build": "tsup src/global.ts && tsup src/index.ts"
+	},
+	"devDependencies": {
+		"tsup": "^8.4.0",
+		"typescript": "^5.8.3",
+		"vite": "^6.3.4"
 	},
 	"main": "dist/global.js",
 	"types": "src/types/global.ts",

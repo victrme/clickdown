@@ -2,11 +2,6 @@
 	"name": "@victr/clickdown",
 	"version": "1.3.4",
 	"exports": "./src/index.ts",
-	"imports": {
-		"typescript": "npm:typescript@^5.8.3",
-		"tsup": "npm:tsup@^8.4.0",
-		"vite": "npm:vite@^6.3.2"
-	},
 	"lint": {
 		"include": ["src"],
 		"rules": {
